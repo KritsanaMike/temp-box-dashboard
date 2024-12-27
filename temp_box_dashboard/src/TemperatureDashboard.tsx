@@ -9,16 +9,18 @@ const TemperatureDashboard: React.FC = () => {
 
   useEffect(() => {
     const fetchTemperature = async () => {
-      const AIO_USERNAME = "kritsanansru"; // Replace with Adafruit IO username
-      const AIO_KEY = "aio_ZYWd05aV8e2W8Fn6ru44RPyVRQMa"; // Replace with Adafruit IO key
-      const FEED_KEY = "temperature"; // Replace with your feed key
+
+      const AIO_USERNAME = import.meta.env.VITE_USERNAME;
+      const FEED_KEY = import.meta.env.VITE_FEED_KEY;
+
 
       const url = `https://io.adafruit.com/api/v2/${AIO_USERNAME}/feeds/${FEED_KEY}/data`;
-
+      console.log(url);
+      
       try {
         const response = await axios.get(url, {
           headers: {
-            "X-AIO-Key": AIO_KEY,
+            // "X-AIO-Key": AIO_KEY,
           },
         });
 
@@ -26,6 +28,7 @@ const TemperatureDashboard: React.FC = () => {
         if (data.length > 0) {
           const latestEntry = data[0]; // Assuming the latest data is the first entry
           setTemperature(parseFloat(parseFloat(latestEntry.value).toFixed(2)));
+          // setTemperature(parseFloat(latestEntry.value));
 
         } else {
           setError("No data found in the feed.");
