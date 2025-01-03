@@ -1,10 +1,12 @@
 import React from "react";
-import TemperatureDashboard from "./TemperatureDashboard";
+// import TemperatureDashboard from "./TemperatureDashboard";
+import TempChart from "./TempChart";
 
 const App: React.FC = () => {
   return (
     <div>
-      <TemperatureDashboard />
+      {/* <TemperatureDashboard /> */}
+      <TempChart />
     </div>
   );
 };
